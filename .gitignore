@@ -11,3 +11,4 @@ renderer/ssh_host_ecdsa_key.pub
 renderer/ssh_host_rsa_key
 renderer/ssh_host_rsa_key.pub
 renderer/cloud-init/user-ghifari.yaml
+renderer/ffmpeg-render-webhook.txt

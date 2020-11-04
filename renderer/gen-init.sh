@@ -30,6 +30,10 @@ echo "  - path: /usr/bin/ffmpeg-render" >> ci.yaml
 echo "    content: |" >> ci.yaml
 sed "s/^/      /" scripts/ffmpeg-render.sh >> ci.yaml
 
+echo "  - path: /automation/ffmpeg-render-webhook" >> ci.yaml
+echo "    content: |" >> ci.yaml
+sed "s/^/      /" ffmpeg-render-webhook.txt >> ci.yaml
+
 cat cloud-init/runcmd.yaml >> ci.yaml
 
 cat cloud-init/ssh.yaml >> ci.yaml
