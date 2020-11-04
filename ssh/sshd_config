@@ -1,0 +1,13 @@
+# sshd_config v0.1.0
+# 
+# Copyright (C) GHIFARI160
+# Distributed under the terms of the MIT License
+
+PermitRootLogin no
+PasswordAuthentication no
+ChallengeResponseAuthentication no
+UsePAM yes
+X11Forwarding yes
+PrintMotd no
+AcceptEnv LANG LC_*
+Subsystem sftp /usr/lib/openssh/sftp-server

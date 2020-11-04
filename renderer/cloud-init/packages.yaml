@@ -1,0 +1,13 @@
+packages:
+  - apt-transport-https
+  - ca-certificates
+  - curl
+  - gnupg2
+  - software-properties-common
+  - supervisor
+  - x264
+  - x265
+  - fdkaac
+package_update: true
+package_upgrade: true
+package_reboot_if_required: true

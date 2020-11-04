@@ -1,0 +1,13 @@
+runcmd:
+  - apt purge do-agent
+  - mkdir /automation
+  - curl -sSL 'https://repos.insights.digitalocean.com/install.sh' - o /automation/do-agent-install.sh
+  - bash /automation/do-agent-install.sh
+  - rm -rf /automation
+  - curl -sL https://deb.nodesource.com/setup_14.x | /bin/bash
+  - apt update
+  - apt install -no-install-recommends --no-install-suggests -y nodejs
+  - apt clean
+  - chmod +x /usr/bin/medhash-gen
+  - chmod +x /usr/bin/medhash-chk
+  - chmod +x /usr/bin/ffmpeg-render

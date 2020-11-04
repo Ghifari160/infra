@@ -1,7 +1,7 @@
 # Infra
 
-A collection of configurations and internal tools for the creation and management of GHIFARI160's
-cloud infrastructure.
+A collection of configurations and tools for the creation and management of GHIFARI160's cloud
+infrastructure.
 
 ## Secrets
 
