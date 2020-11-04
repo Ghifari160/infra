@@ -6,7 +6,9 @@ infrastructure.
 ## Secrets
 
 This is the _only_ repository to store all configurations. Secrets are encrypted using
-[`git-secret`](https://git-secret.io/) before every commit.
+[`git-secret`](https://git-secret.io/) before every commit. These secrets are tied to GHIFARI160's
+infrastructure. You will not have access to these secrets. If you do, _DO NOT_ use these for any
+other purpose.
 
 ## License
 
