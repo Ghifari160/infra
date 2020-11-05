@@ -22,7 +22,7 @@ RUN set -x && \
     apt clean && \
     rm -rf /var/lib/apt/lists/*
 
-COPY supervisord.conf /etc/supervisor/conf.d/supervisord.conf
+COPY supervisor-configs/supervisord.conf /etc/supervisor/conf.d/supervisord.conf
 
 ################
 ##    GOSU    ##
@@ -71,9 +71,9 @@ RUN set -x && \
     npm install -g ghost-cli && \
     mkdir -p /var/www/ghost
 
-COPY ghost.sh /init/ghost.sh
-COPY ghost-setup.sh /init/ghost-setup.sh
-COPY supervisor-ghost.conf /etc/supervisor/conf.d/ghost.conf
+COPY scripts/ghost.sh /init/ghost.sh
+COPY scripts/ghost-setup.sh /init/ghost-setup.sh
+COPY supervisor-configs/supervisor-ghost.conf /etc/supervisor/conf.d/ghost.conf
 
 VOLUME /var/www/ghost
 
