@@ -32,7 +32,7 @@ sed "s/^/      /" scripts/ffmpeg-render.sh >> ci.yaml
 
 echo "  - path: /automation/ffmpeg-render-webhook" >> ci.yaml
 echo "    content: |" >> ci.yaml
-sed "s/^/      /" ffmpeg-render-webhook.txt >> ci.yaml
+sed "s/^/      /" webhooks/ffmpeg-render-webhook.txt >> ci.yaml
 
 cat cloud-init/runcmd.yaml >> ci.yaml
 
@@ -40,16 +40,16 @@ cat cloud-init/ssh.yaml >> ci.yaml
 
 echo "ssh_keys:" >> ci.yaml
 echo "  rsa_private: |" >> ci.yaml
-sed "s/^/    /" ssh_host_rsa_key >> ci.yaml
-sed "s/^/  rsa_public: /" ssh_host_rsa_key.pub >> ci.yaml
+sed "s/^/    /" ssh/ssh_host_rsa_key >> ci.yaml
+sed "s/^/  rsa_public: /" ssh/ssh_host_rsa_key.pub >> ci.yaml
 
 echo "  dsa_private: |" >> ci.yaml
-sed "s/^/    /" ssh_host_dsa_key >> ci.yaml
-sed "s/^/  dsa_public: /" ssh_host_dsa_key.pub >> ci.yaml
+sed "s/^/    /" ssh/ssh_host_dsa_key >> ci.yaml
+sed "s/^/  dsa_public: /" ssh/ssh_host_dsa_key.pub >> ci.yaml
 
 echo "  ecdsa_private: |" >> ci.yaml
-sed "s/^/    /" ssh_host_ecdsa_key >> ci.yaml
-sed "s/^/  ecdsa_public: /" ssh_host_ecdsa_key.pub >> ci.yaml
+sed "s/^/    /" ssh/ssh_host_ecdsa_key >> ci.yaml
+sed "s/^/  ecdsa_public: /" ssh/ssh_host_ecdsa_key.pub >> ci.yaml
 
 echo "users:" >> ci.yaml
 sed "s/^/  /" cloud-init/user-ghifari.yaml >> ci.yaml

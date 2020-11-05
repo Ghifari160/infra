@@ -4,11 +4,11 @@ ci.yaml
 
 .gitsecret/keys/random_seed
 !*.secret
-renderer/ssh_host_dsa_key
-renderer/ssh_host_dsa_key.pub
-renderer/ssh_host_ecdsa_key
-renderer/ssh_host_ecdsa_key.pub
-renderer/ssh_host_rsa_key
-renderer/ssh_host_rsa_key.pub
+renderer/ssh/ssh_host_dsa_key
+renderer/ssh/ssh_host_dsa_key.pub
+renderer/ssh/ssh_host_ecdsa_key
+renderer/ssh/ssh_host_ecdsa_key.pub
+renderer/ssh/ssh_host_rsa_key
+renderer/ssh/ssh_host_rsa_key.pub
 renderer/cloud-init/user-ghifari.yaml
-renderer/ffmpeg-render-webhook.txt
+renderer/webhooks/ffmpeg-render-webhook.txt
