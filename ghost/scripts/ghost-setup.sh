@@ -1,9 +1,11 @@
 #!/bin/bash
 
 ghost_setup() {
+    mkdir -p /var/www/ghost/content/settings
     chown node:node /var/www/ghost
     chmod 775 /var/www/ghost
-    gosu node ghost install --production --db sqlite3 --no-prompt --no-stack --no-setup --dir /var/www/ghost
+    cp /init/ghost-routes.yaml /var/www/ghost/content/settings/routes.yaml
+    gosu node ghost install --production --db sqlite3 --no-prompt --no-stack --no-setup --no-check-empty --dir /var/www/ghost
     cd /var/www/ghost
     gosu node ghost config --ip 0.0.0.0 --port $GHOST_PORT --no-prompt --db sqlite3 --url $GHOST_URL --admin-url $GHOST_ADMIN_URL --dbpath /var/www/ghost/content/data/ghost.db
     gosu node ghost config paths.contentPath /var/www/ghost/content

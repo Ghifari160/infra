@@ -69,13 +69,14 @@ ENV GHOST_ADMIN_URL=http://localhost:2368
 
 RUN set -x && \
     npm install -g ghost-cli && \
-    mkdir -p /var/www/ghost
+    mkdir -p /var/www/ghost/content
 
 COPY scripts/ghost.sh /init/ghost.sh
 COPY scripts/ghost-setup.sh /init/ghost-setup.sh
 COPY supervisor-configs/supervisor-ghost.conf /etc/supervisor/conf.d/ghost.conf
+COPY ghost-settings/routes.yaml /init/ghost-routes.yaml
 
-VOLUME /var/www/ghost
+VOLUME /var/www/ghost/content
 
 EXPOSE 2368
 
