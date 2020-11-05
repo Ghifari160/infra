@@ -30,6 +30,7 @@ ffmpeg -i ${1} \
     -movflags faststart \
     -c:v libx265 \
     -profile:v main \
+    -preset faster \
     -bf 2 \
     -g 30 \
     -x265-params open-gop=0 \
