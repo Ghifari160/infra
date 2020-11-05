@@ -75,6 +75,7 @@ COPY scripts/ghost.sh /init/ghost.sh
 COPY scripts/ghost-setup.sh /init/ghost-setup.sh
 COPY supervisor-configs/supervisor-ghost.conf /etc/supervisor/conf.d/ghost.conf
 COPY ghost-settings/routes.yaml /init/ghost-routes.yaml
+COPY themes/attila /init/themes/attila
 
 VOLUME /var/www/ghost/content
 

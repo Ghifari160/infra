@@ -1,0 +1,157 @@
+From fa32f6bbab05517ebaa43631fcceaaaeb49df9b3 Mon Sep 17 00:00:00 2001
+From: GHIFARI160 <ghifari@ghifari160.com>
+Date: Thu, 5 Nov 2020 07:12:49 -0600
+Subject: [PATCH] Modify theme
+
+- Remove post reading progress bar
+- Remove post estimated reading time
+- Scope post prev/next links to the same primary tag
+- Add logic to loop partials to exclude JST posts from being linked
+- Add logic to loop partials to exclude JST posts from having ellipses after the excerpt
+- Add custom template for blogs
+---
+ g16-blogs.hbs     | 30 ++++++++++++++++++++++++++++++
+ partials/loop.hbs | 12 ++++++++++--
+ post.hbs          | 31 +++----------------------------
+ 3 files changed, 43 insertions(+), 30 deletions(-)
+ create mode 100644 g16-blogs.hbs
+
+diff --git a/g16-blogs.hbs b/g16-blogs.hbs
+new file mode 100644
+index 0000000..896be0c
+--- /dev/null
++++ b/g16-blogs.hbs
+@@ -0,0 +1,30 @@
++{{!< default}}
++<header class="blog-header has-cover">
++    <div class="inner">
++        <div class="box blog-box">
++            <h1 class="blog-name">{{tag.name}}</h1>
++            <span class="blog-description">{{tag.description}}</span>
++        </div>
++        <div class="blog-cover cover">
++            {{#if tag.feature_image}}
++                <img srcset="{{img_url tag.feature_image size="s"}} 320w,
++                    {{img_url tag.feature_image size="m"}} 640w,
++                    {{img_url tag.feature_image size="l"}} 960w,
++                    {{img_url tag.feature_image size="xl"}} 1920w"
++                    src="{{img_url tag.feature_image size="xl"}}" alt="{{tag.name}}" />
++            {{else}}
++                <img srcset="{{img_url @site.cover_image size="s"}} 320w,
++                        {{img_url @site.cover_image size="m"}} 640w,
++                        {{img_url @site.cover_image size="l"}} 960w,
++                        {{img_url @site.cover_image size="xl"}} 1920w"
++                        src="{{img_url @site.cover_image size="xl"}}" alt="{{@site.title}}" />
++            {{/if}}
++        </div>
++    </div>
++</header>
++
++<div id="index" class="container">
++    <main class="content" role="main">
++        {{> "loop"}}
++    </main>
++</div>
+diff --git a/partials/loop.hbs b/partials/loop.hbs
+index f2510a4..3954466 100644
+--- a/partials/loop.hbs
++++ b/partials/loop.hbs
+@@ -7,7 +7,13 @@
+ <article class="{{post_class}}">
+ 	<div class="inner">
+ 		<div class="box post-box">
+-			<h2 class="post-title"><a href="{{url}}">{{{title}}}</a></h2>
++			<h2 class="post-title">
++				{{#has tag="just streamer things"}}
++					{{title}}
++				{{else}}
++					<a href="{{url}}">{{{title}}}</a>
++				{{/has}}
++			</h2>
+ 			<span class="post-meta">
+ 				{{t "By"}}
+ 				{{authors separator=", "}}
+@@ -15,7 +21,9 @@
+ 				{{t "on"}}
+ 				<time datetime="{{date format='DD-MM-YYYY'}}">{{date format="DD MMM YYYY"}}</time>
+ 			</span>
+-			<p class="post-excerpt">{{excerpt}}&hellip;</p>
++			<p class="post-excerpt">
++				{{excerpt}}{{^has tag="just streamer things"}}&hellip;{{/has}}
++			</p>
+ 		</div>
+ 	</div>
+ </article>
+diff --git a/post.hbs b/post.hbs
+index f0407df..c4c5edd 100644
+--- a/post.hbs
++++ b/post.hbs
+@@ -2,10 +2,6 @@
+ 
+ {{#post}}
+ 
+-<div class="progress-container">
+-	<span class="progress-bar"></span>
+-</div>
+-
+ <header class="post-header {{#if feature_image}} has-cover {{/if}}">
+ 	<div class="inner">
+ 		<span class="post-info">
+@@ -28,7 +24,7 @@
+ 				{{/foreach}}
+ 			</div>
+ 			<h4 class="post-meta-author">{{authors separator=", "}}</h4>
+-			<time datetime="{{date format='DD-MM-YYYY'}}">{{date format="DD MMM YYYY"}}</time> &bull; {{reading_time minute=(t "1 min read") minutes=(t "% min read")}}
++			<time datetime="{{date format='DD-MM-YYYY'}}">{{date format="DD MMM YYYY"}}</time>
+ 		</div>
+ 		{{#if feature_image}}
+ 		<div class="post-cover cover">
+@@ -93,7 +89,7 @@
+       {{/if}}
+ 
+ 			<aside class="post-nav">
+-				{{#next_post}}
++				{{#next_post in="primary_tag"}}
+ 					<a class="post-nav-next" href="{{url}}">
+ 						<section class="post-nav-teaser">
+ 							<i class="icon icon-arrow-left" aria-label="{{t "Next post"}}"></i>
+@@ -103,7 +99,7 @@
+ 						</section>
+ 					</a>
+ 				{{/next_post}}
+-				{{#prev_post}}
++				{{#prev_post in="primary_tag"}}
+ 					<a class="post-nav-prev" href="{{url}}">
+ 						<section class="post-nav-teaser">
+ 							<i class="icon icon-arrow-right" aria-label="{{t "Previous post"}}"></i>
+@@ -153,27 +149,6 @@
+ 	    });
+ 	  }
+ 	  codestyling();
+-		// Reading progress bar on window top
+-	  function readingProgress() {
+-			var postBottom = post.offset().top + post.height();
+-			var viewportHeight = viewport.height();
+-      var progress = 100 - (((postBottom - (viewport.scrollTop() + viewportHeight) + viewportHeight / 3) / (postBottom - viewportHeight + viewportHeight / 3)) * 100);
+-      $('.progress-bar').css('width', progress + '%');
+-      (progress > 100) ? $('.progress-container').addClass('complete'): $('.progress-container').removeClass('complete');
+-	  }
+-	  readingProgress();
+-		// Trigger reading progress
+-	  viewport.on({
+-	    'scroll': function() {
+-	      readingProgress();
+-	    },
+-	    'resize': function() {
+-	      readingProgress();
+-	    },
+-	    'orientationchange': function() {
+-	      readingProgress();
+-	    }
+-	  });
+ 		// Check if disqus is defined by code injection
+ 		if (typeof disqus === 'undefined') {
+ 			// hide comment section
+-- 
+2.23.0
+

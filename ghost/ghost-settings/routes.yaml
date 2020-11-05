@@ -1,33 +1,34 @@
 routes:
   /:
     controller: channel
-    template: g16-blog
+    template: g16-blogs
     filter: primary_tag:blog
+    data: 'tag.blog'
   /cooperative-chaos/:
     controller: channel
-    template: g16-cc
+    template: g16-blogs
     filter: 'primary_tag:cooperative-chaos'
     data: 'tag.cooperative-chaos'
   /just-streamer-things/:
     controller: channel
-    template: g16-jst
+    template: g16-blogs
     filter: 'primary_tag:just-streamer-things'
     data: 'tag.just-streamer-things'
 
 collections:
   /blog/:
     permalink: /blog/{slug}/
-    template: g16-blog
+    template: g16-blogs
     filter: primary_tag:blog
     data: 'tag.blog'
   /cc/:
     permalink: /cc/{slug}/
-    template: g16-cc
+    template: g16-blogs
     filter: 'primary_tag:cooperative-chaos'
     data: 'tag.cooperative-chaos'
   /jst/:
     permalink: /jst/{slug}/
-    template: g16-jst
+    template: g16-blogs
     filter: 'primary_tag:just-streamer-things'
     data: 'tag.just-streamer-things'
 
