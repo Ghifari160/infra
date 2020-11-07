@@ -33,6 +33,7 @@ ffmpeg -i ${1} \
     -preset faster \
     -bf 2 \
     -g 30 \
+    -tag:v hvc1 \
     -x265-params open-gop=0 \
     -crf 18 \
     -pix_fmt yuv420p \
