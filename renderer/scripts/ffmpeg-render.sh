@@ -1,10 +1,11 @@
 #!/bin/bash
 
-# ffmpeg x265/HEVC wrapper v0.3.0
+# ffmpeg x265/HEVC wrapper v0.4.0
 # 
 # Copyright (C) GHIFARI160
 # Distributed under the terms of the MIT License
 
+USER=$(whoami)
 WEBHOOK_AUTHOR=renderer.gassets.space
 WEBHOOK_URL=$(cat /automation/ffmpeg-render-webhook)
 
@@ -19,7 +20,7 @@ curl -d '{
             "color": 30656,
             "author": { "name": "'${WEBHOOK_AUTHOR}'" },
             "title": "Render Started",
-            "description": "**Input:** '${1}'\n**Target:** '${2}'"
+            "description": "**User:** '${USER}'\n**Input:** '${1}'\n**Target:** '${2}'"
         }
     ]
 }' \
@@ -50,7 +51,7 @@ curl -d '{
             "color": 65280,
             "author": { "name": "'${WEBHOOK_AUTHOR}'" },
             "title": "Render Completed",
-            "description": "**Input:** '${1}'\n**Target:** '${2}'"
+            "description": "**User:** '${USER}'\n**Input:** '${1}'\n**Target:** '${2}'"
         }
     ]
 }' \
