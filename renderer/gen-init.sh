@@ -18,14 +18,6 @@ echo "    content: |" >> ci.yaml
 # cat ../ssh/sshd_config >> ci.yaml
 sed "s/^/      /" ../ssh/sshd_config >> ci.yaml
 
-echo "  - path: /usr/bin/medhash-gen" >> ci.yaml
-echo "    content: |" >> ci.yaml
-sed "s/^/      /" scripts/medhash-gen.sh >> ci.yaml
-
-echo "  - path: /usr/bin/medhash-chk" >> ci.yaml
-echo "    content: |" >> ci.yaml
-sed "s/^/      /" scripts/medhash-chk.sh >> ci.yaml
-
 echo "  - path: /usr/bin/ffmpeg-render" >> ci.yaml
 echo "    content: |" >> ci.yaml
 sed "s/^/      /" scripts/ffmpeg-render.sh >> ci.yaml
