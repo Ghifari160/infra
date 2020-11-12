@@ -8,7 +8,7 @@ runcmd:
   - apt install -no-install-recommends --no-install-suggests -y nodejs
   - apt clean
   - mkdir /automation/medhash-tools
-  - curl -sSl https://projects.gassets.space/medhash-tools/v0.2.0/medhash-tools-linux-v0.2.0.tar.gz | tar -zxvf - -C /automation/medhash-tools --overwrite
+  - curl -sSl https://projects.gassets.space/medhash-tools/v0.3.0/medhash-tools-linux-v0.3.0.tar.gz | tar -zxvf - -C /automation/medhash-tools --overwrite
   - cp /automation/medhash-tools/medhash-gen /usr/bin
   - cp /automation/medhash-tools/medhash-chk /usr/bin
   - cp /automation/medhash-tools/medhash-upgrade /usr/bin
