@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# ffmpeg x265/HEVC wrapper v0.4.0
+# ffmpeg x265/HEVC wrapper v0.5.0
 # 
 # Copyright (C) GHIFARI160
 # Distributed under the terms of the MIT License
